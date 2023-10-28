@@ -6,6 +6,7 @@ import Practictwo from "./components/Practictwo";
 import Practicthree from "./components/Practicthree";
 import { useState } from "react";
 import TaksForms from "./components/TaksForms";
+import VeterinaryPatients from "./components/VeterinaryPatients/VeterinaryPatients";
 
 function App() {
   const [changestatus, setchangestatus] = useState(false);
@@ -24,6 +25,7 @@ function App() {
           </button>
         </div>
         <TaksForms></TaksForms>
+        <VeterinaryPatients />
       </Container>
     </div>
   );

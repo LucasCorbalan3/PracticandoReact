@@ -43,6 +43,7 @@ const TaksForms = () => {
           </div>
         </div>
       </div>
+      <hr></hr>
     </>
   );
 };
