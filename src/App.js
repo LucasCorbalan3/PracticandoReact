@@ -5,6 +5,7 @@ import { Container } from "react-bootstrap";
 import Practictwo from "./components/Practictwo";
 import Practicthree from "./components/Practicthree";
 import { useState } from "react";
+import TaksForms from "./components/TaksForms";
 
 function App() {
   const [changestatus, setchangestatus] = useState(false);
@@ -18,8 +19,11 @@ function App() {
           <button
             className="btn btn-danger text-center"
             onClick={() => setchangestatus(!changestatus)}
-          >Click Me!</button>
+          >
+            Click Me!
+          </button>
         </div>
+        <TaksForms></TaksForms>
       </Container>
     </div>
   );
