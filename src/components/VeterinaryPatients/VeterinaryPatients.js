@@ -1,31 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import "./Veterinary.css";
+import { useEffect, useState } from "react";
+import { Form, Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 import CitationItem from "./CitationItem";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const VeterinaryPatients = () => {
-  const [citation, SetCitation] = useState("");
-  const [citacions, SetCitations] = useState([]);
+  let citasFromLocalStorage = JSON.parse(localStorage.getItem("Citas")) || [];
+
+  const [citation, SetCitation] = useState(citasFromLocalStorage);
+  const [citacion, SetCitacion] = useState({});
 
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    SetCitations((prevCitations) => ({
-      ...prevCitations,
+    SetCitacion((prevCitacion) => ({
+      ...prevCitacion,
       [name]: value,
     }));
   };
 
   const handleSubmit = (e) => {
-    e.PreventDefault();
+    e.preventDefault();
     if (
-      citacions.mascota.trim() &&
-      citacions.dueño.trim() &&
-      citacions.fecha.trim() &&
-      citacions.hora.trim() &&
-      citacions.sintomas.trim()
+      citacion.mascota?.trim() &&
+      citacion.dueño?.trim() &&
+      citacion.fecha.trim() &&
+      citacion.hora.trim() &&
+      citacion.sintomas?.trim()
     )
       Swal.fire({
         title: "Seguro desea enviar el formulario?",
@@ -34,7 +34,7 @@ const VeterinaryPatients = () => {
         denyButtonText: `Cancelar`,
       }).then((result) => {
         if (result.isConfirmed) {
-          SetCitation((prevArray) => [...prevArray, citacions]);
+          SetCitation((prevArray) => [...prevArray, citacion]);
           Swal.fire("datos Enviado!", "", "success");
         } else if (result.isDenied) {
           Swal.fire("Envio cancelado", "", "info");
@@ -48,7 +48,7 @@ const VeterinaryPatients = () => {
         footer: '<a href="">Why do I have this issue?</a>',
       });
     }
-    SetCitations({});
+    SetCitacion({});
   };
 
   useEffect(() => {
@@ -72,8 +72,11 @@ const VeterinaryPatients = () => {
             type="text"
             placeholder="Nombre de la Mascota"
             onChange={handleChange}
-            value={citacions.mascota || ""}
+            value={citacion.mascota || ""}
           />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Nombre del Dueño</Form.Label>
           <Form.Control
             name="dueño"
@@ -81,24 +84,33 @@ const VeterinaryPatients = () => {
             type="text"
             placeholder="Nombre del Dueño"
             onChange={handleChange}
-            value={citacions.dueño || ""}
+            value={citacion.dueño || ""}
           />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Fecha de Ingreso</Form.Label>
           <Form.Control
             name="fecha"
             className="mb-3"
             type="date"
             onChange={handleChange}
-            value={citacions.fecha || ""}
+            value={citacion.fecha || ""}
           />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Hora de Ingreso</Form.Label>
           <Form.Control
             name="hora"
             className="mb-3"
             type="time"
             onChange={handleChange}
-            value={citacions.hora || ""}
+            value={citacion.hora || ""}
           />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Sintomas</Form.Label>
           <Form.Control
             name="sintomas"
@@ -106,12 +118,13 @@ const VeterinaryPatients = () => {
             rows={5}
             placeholder="Ingrese un detalle de los sintomas presentados"
             onChange={handleChange}
-            value={citacions.sintomas || ""}
+            value={citacion.sintomas || ""}
           />
-          <Button variant="primary" type="submit">
-            Guardar Cita
-          </Button>
         </Form.Group>
+
+        <Button variant="primary" type="submit">
+          Guardar Cita
+        </Button>
       </Form>
       <section className="container">
         {citation.map((cita, index) => (
