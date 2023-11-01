@@ -5,7 +5,7 @@ import { Container } from "react-bootstrap";
 import Practictwo from "./components/Practictwo";
 import Practicthree from "./components/Practicthree";
 import { useState } from "react";
-import TaksForms from "./components/TaksForms";
+import TaksForms from "./components/TaksForms/TaksForms";
 import VeterinaryPatients from "./components/VeterinaryPatients/VeterinaryPatients";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
             Click Me!
           </button>
         </div>
-        <TaksForms></TaksForms>
+        <TaksForms/>
         <VeterinaryPatients />
       </Container>
     </div>

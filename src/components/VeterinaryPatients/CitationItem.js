@@ -1,19 +1,25 @@
 import React from "react";
-import { Button, Card,} from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
-const CitationItem = () => {
+const CitationItem = ({cita}) => {
   return (
-    <>
-      <Card.Img variant="top" src="holder.js/100px180" />
-      <Card.Title>Nombre Mascota</Card.Title>
-      <Card.Subtitle className="mb-2 text-muted">Nombre Dueño</Card.Subtitle>
+    <Card className="text-center">
+      <Card.Header> {cita.mascota} </Card.Header>
+        <Card.Title> {cita.dueño} </Card.Title>
       <Card.Body>
-        <Card.Text>Fecha</Card.Text>
-        <Card.Text>hora</Card.Text>
-        <Card.Text>Sintomas</Card.Text>
-        <Button variant="primary">Cerrar Cita</Button>
+        <Card.Text>
+          {cita.fecha}
+        </Card.Text>
+        <Card.Text>
+          {cita.hora}
+        </Card.Text>
+        <Card.Text>
+          {cita.sintomas}
+        </Card.Text>
+        <Button variant="primary">Go somewhere</Button>
       </Card.Body>
-    </>
+      <Card.Footer className="text-muted">2 days ago</Card.Footer>
+    </Card>
   );
 };
 

@@ -30,7 +30,7 @@ const TaksForms = () => {
                   onChange={(e) => SetTask(e.target.value)}
                   value={task}
                 />
-                <Button variant="primary" type="submit" >
+                <Button variant="primary" type="submit">
                   Agregar Tarea
                 </Button>
               </Form.Group>
