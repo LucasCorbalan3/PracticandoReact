@@ -55,8 +55,20 @@ const VeterinaryPatients = () => {
   }, [citation]);
 
   const deleteCita = (cita) => {
-    let newCitations = citation.filter((id) => id !== cita);
-    SetCitacion(newCitations);
+    Swal.fire({
+      title: "¿Are you sure you want to delete the appointment?",
+      showDenyButton: true,
+      confirmButtonText: "I am sure",
+      denyButtonText: "I am not sure",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        let newCitations = citation.filter((id) => id !== cita);
+        SetCitation(newCitations);
+        Swal.fire("appointment eliminated!", "", "success");
+      } else if (result.isDenied) {
+        Swal.fire("Operation canceled", "", "info");
+      }
+    });
   };
 
   return (
