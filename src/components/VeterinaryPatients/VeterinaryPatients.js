@@ -21,10 +21,10 @@ const VeterinaryPatients = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      citacion.mascota?.trim() ||
-      citacion.dueño?.trim() ||
-      citacion.fecha.trim() ||
-      citacion.hora.trim() ||
+      citacion.mascota?.trim() &&
+      citacion.dueño?.trim() &&
+      citacion.fecha.trim() &&
+      citacion.hora.trim() &&
       citacion.sintomas?.trim()
     )
       Swal.fire({
@@ -53,6 +53,11 @@ const VeterinaryPatients = () => {
   useEffect(() => {
     localStorage.setItem("Citas", JSON.stringify(citation));
   }, [citation]);
+
+  const deleteCita = (cita) => {
+    let newCitations = citation.filter((id) => id !== cita);
+    SetCitacion(newCitations);
+  };
 
   return (
     <>
@@ -127,7 +132,7 @@ const VeterinaryPatients = () => {
       </Form>
       <section className="container">
         {citation.map((cita, index) => (
-          <CitationItem cita={cita} key={index} />
+          <CitationItem cita={cita} key={index} deleteCita={deleteCita} />
         ))}
       </section>
     </>
