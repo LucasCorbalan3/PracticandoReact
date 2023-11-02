@@ -21,31 +21,30 @@ const VeterinaryPatients = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      citacion.mascota?.trim() &&
-      citacion.dueño?.trim() &&
-      citacion.fecha.trim() &&
-      citacion.hora.trim() &&
+      citacion.mascota?.trim() ||
+      citacion.dueño?.trim() ||
+      citacion.fecha.trim() ||
+      citacion.hora.trim() ||
       citacion.sintomas?.trim()
     )
       Swal.fire({
-        title: "Seguro desea enviar el formulario?",
+        title: "Are you sure you want to send the form?",
         showDenyButton: true,
-        confirmButtonText: "Enviar",
-        denyButtonText: `Cancelar`,
+        confirmButtonText: "Send",
+        denyButtonText: `Cancel`,
       }).then((result) => {
         if (result.isConfirmed) {
           SetCitation((prevArray) => [...prevArray, citacion]);
-          Swal.fire("datos Enviado!", "", "success");
+          Swal.fire("your appointment successfully!", "", "success");
         } else if (result.isDenied) {
-          Swal.fire("Envio cancelado", "", "info");
+          Swal.fire("shipment canceled", "", "info");
         }
       });
     else {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "Completar todos los campos",
-        footer: '<a href="">Why do I have this issue?</a>',
+        text: "Complete all fields",
       });
     }
     SetCitacion({});
