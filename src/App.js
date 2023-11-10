@@ -4,12 +4,22 @@ import Practic from "./components/Practic";
 import { Container } from "react-bootstrap";
 import Practictwo from "./components/Practictwo";
 import Practicthree from "./components/Practicthree";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TaksForms from "./components/TaksForms/TaksForms";
 import VeterinaryPatients from "./components/VeterinaryPatients/VeterinaryPatients";
+import WebNotice from "./components/WebNotice/WebNotice";
 
 function App() {
   const [changestatus, setchangestatus] = useState(false);
+  const [articles, SetArticle] = useState([]);
+  useEffect(() => {
+    fetch(
+      "https://newsapi.org/v2/top-headlines?country=ar&apiKey=3ef5a5b9375d46c0b4c92daff3ad59df"
+    )
+      .then((res) => res.json())
+      .then((data) => SetArticle(data.articles || []));
+  }, []);
+
   return (
     <div>
       <Container>
@@ -24,8 +34,9 @@ function App() {
             Click Me!
           </button>
         </div>
-        <TaksForms/>
+        <TaksForms />
         <VeterinaryPatients />
+        <WebNotice articles={articles} />
       </Container>
     </div>
   );
